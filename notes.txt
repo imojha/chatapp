@@ -1,0 +1,2 @@
+For any parse to get content from html page,
+you need to have "name attribute" in html page
