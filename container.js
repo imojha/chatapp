@@ -5,7 +5,7 @@ const container = dependable.container();
 
 const myModules = [
     ['_', 'lodash'],
-    ['mongoose', 'mongoose' ]
+    ['passport', 'passport']
 ]
 
 myModules.forEach(function(val){

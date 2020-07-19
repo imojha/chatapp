@@ -14,7 +14,7 @@ const container = require('./container')
 const passport = require('passport')
 
 
-container.resolve(function(users){
+container.resolve(function(users, _){
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost/mydb', {
         useNewUrlParser: true,
@@ -61,6 +61,8 @@ container.resolve(function(users){
         app.use(flash());
         app.use(passport.initialize());
         app.use(passport.session());
+
+        app.locals._ = _
 
     }
 

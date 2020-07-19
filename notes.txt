@@ -1,2 +1,12 @@
 For any parse to get content from html page,
 you need to have "name attribute" in html page
+-> "express validator" must be placed after the "body-parser" 
+
+
+By doing this you can close a div
+<div class="alert alert-danger text-center">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <% _.forEach(messages, function(error){%>
+                        <%= error %> <br>
+                    <%})%>
+                </div>

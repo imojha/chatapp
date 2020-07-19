@@ -15,6 +15,8 @@ passport.deserializeUser((id, done) => {
 })
 
 // passport middleware
+
+// Sign up middleware
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -26,7 +28,22 @@ passport.use('local.signup', new LocalStrategy({
         const newUser = new User();
         newUser.username = req.body.username;
         newUser.email = req.body.email
-        newUser.password = req.body.password;
+        newUser.password = newUser.encryptPassword(req.body.password);
         newUser.save(err => done(null, newUser))
+    })
+}))
+
+
+// Login Middleware
+passport.use('local.login', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+},(req, email, password, done) => {
+    User.findOne({'email': email}, (err, user) => {
+        if (err) {return done(err);}
+        if (!user) {return done(null, false, req.flash('error', 'No user found.'))}
+        if (!user.comparePassword(password)) {return done(null, false, req.flash('error', 'Wrong Password'))}
+        return done(null, user);
     })
 }))
